@@ -1,5 +1,6 @@
   import { useState, useRef, useEffect } from "react";
-  import { motion } from "framer-motion";
+import { motion } from "framer-motion";
+import { AiFillRobot } from "react-icons/ai";
 
   type Message = {
     sender: "user" | "bot";
@@ -35,7 +36,7 @@
       try {
         const sanitizedMessage = input.replace(/[\n\r]/g, " ");
 
-        const response = await fetch("https://vanii2.app.n8n.cloud/webhook-test/chatbot", {
+        const response = await fetch("https://vanii2.app.n8n.cloud/webhook/chatbot", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -102,11 +103,10 @@
         {/* Nút mở/đóng chatbox */}
         <button
           onClick={() => setIsChatOpen(!isChatOpen)}
-          className="fixed bottom-10 w-20 h-20 right-10 bg-yellow-300 text-white p-4 rounded-full shadow-lg"
+          className="fixed bottom-10 right-10 w-20 h-20 flex items-center justify-center bg-yellow-300 rounded-full shadow-lg hover:bg-yellow-400 transition duration-300"
         >
-          💬
+          <AiFillRobot className="text-4xl text-white" />
         </button>
-
         {/* Chatbox Popup */}
         {isChatOpen && (
           <motion.div
